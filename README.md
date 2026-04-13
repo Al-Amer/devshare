@@ -36,5 +36,5 @@ A modern, responsive web application for discovering and sharing developer tutor
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/devshare.git
+git clone https://github.com/Al-Amer/devshare.git
 cd devshare
