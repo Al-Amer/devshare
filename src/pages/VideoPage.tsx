@@ -1,16 +1,46 @@
 import { useParams } from 'react-router-dom';
 import YouTube from 'react-youtube';
-import { Share2, Copy, Check } from 'lucide-react';
-import { useState } from 'react';
+import { Share2, Copy, Check, ThumbsUp, Eye } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { ALL_VIDEOS } from '../data/videosData';
 
 const VideoPage = () => {
   const { id } = useParams<{ id: string }>();
   const [copied, setCopied] = useState(false);
   const [sharedLocally, setSharedLocally] = useState(false);
+  const [liked, setLiked] = useState(false);
   
-  // Find video data
   const video = ALL_VIDEOS.find(v => v.id === id);
+  
+  useEffect(() => {
+    if (video) {
+      // Track view
+      const views = JSON.parse(localStorage.getItem('videoViews') || '{}');
+      views[video.id] = (views[video.id] || 0) + 1;
+      localStorage.setItem('videoViews', JSON.stringify(views));
+      const watchHistory = JSON.parse(localStorage.getItem('watchHistory') || '[]');
+      watchHistory.push({
+        videoId: video.id,
+        title: video.title,
+        date: new Date().toISOString().split('T')[0]
+      });
+      localStorage.setItem('watchHistory', JSON.stringify(watchHistory));
+      const likes = JSON.parse(localStorage.getItem('videoLikes') || '{}');
+      setLiked(!!likes[video.id]);
+    }
+  }, [video]);
+  
+  const handleLike = () => {
+    if (!video) return;
+    const likes = JSON.parse(localStorage.getItem('videoLikes') || '{}');
+    if (liked) {
+      delete likes[video.id];
+    } else {
+      likes[video.id] = true;
+    }
+    localStorage.setItem('videoLikes', JSON.stringify(likes));
+    setLiked(!liked);
+  };
   
   const shareVideo = async () => {
     const url = window.location.href;
@@ -51,37 +81,21 @@ const VideoPage = () => {
     width: '100%',
     playerVars: {
       autoplay: 0,
+      rel: 0,
     },
   };
 
-  // For real YouTube videos, use actual YouTube ID
-  // For our mock data, we need to use real YouTube video IDs
-  const getRealYouTubeId = (mockId: string) => {
-    // Map mock IDs to real YouTube video IDs
-    const videoMap: Record<string, string> = {
-      'e1': 'dQw4w9WgXcQ',  // Real React tutorial
-      'e2': 'jNQXAC9IVRw',
-      'e3': 'VbRqVKqVqVc',
-      // Add more mappings as needed
-    };
-    return videoMap[mockId] || 'dQw4w9WgXcQ'; // Default fallback
-  };
-
-  const youtubeId = getRealYouTubeId(id || '');
-
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
       <div className="container mx-auto px-4 max-w-5xl">
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
           <div className="aspect-video">
-            <YouTube videoId={youtubeId} opts={opts} className="w-full" />
+            <YouTube videoId={id} opts={opts} className="w-full" />
           </div>
-          
           <div className="p-6">
-            <h1 className="text-2xl font-bold text-gray-800 mb-4">
+            <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
               {video?.title || 'Video Title'}
             </h1>
-            
             <div className="flex flex-wrap gap-4 mb-6">
               <button
                 onClick={shareVideo}
@@ -90,7 +104,6 @@ const VideoPage = () => {
                 <Share2 size={18} />
                 Share Video
               </button>
-              
               <button
                 onClick={addToSharedList}
                 className="flex items-center gap-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition"
@@ -98,25 +111,34 @@ const VideoPage = () => {
                 {sharedLocally ? <Check size={18} /> : <Copy size={18} />}
                 {sharedLocally ? 'Shared!' : 'Add to Shared List'}
               </button>
-              
+              <button
+                onClick={handleLike}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition ${
+                  liked 
+                    ? 'bg-red-600 text-white' 
+                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                }`}
+              >
+                <ThumbsUp size={18} />
+                {liked ? 'Liked' : 'Like'}
+              </button>
               {copied && (
-                <span className="text-green-600 flex items-center gap-1">
+                <span className="text-green-600 dark:text-green-400 flex items-center gap-1">
                   <Check size={16} /> Link copied!
                 </span>
               )}
             </div>
-            
-            <div className="border-t pt-4">
-              <h2 className="text-xl font-semibold mb-2">About this video</h2>
-              <p className="text-gray-600">{video?.description || 'No description available'}</p>
-            </div>
-            
-            <div className="border-t mt-4 pt-4">
-              <h2 className="text-xl font-semibold mb-2">Share without stop</h2>
-              <p className="text-gray-600">
-                Click "Share Video" to copy the link or use native sharing. 
-                Click "Add to Shared List" to save locally (persists across sessions).
-              </p>
+            <div className="border-t dark:border-gray-700 pt-4">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+                  <Eye size={16} />
+                  <span className="text-sm">
+                    {JSON.parse(localStorage.getItem('videoViews') || '{}')[video?.id || ''] || 0} views
+                  </span>
+                </div>
+              </div>
+              <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">About this video</h2>
+              <p className="text-gray-600 dark:text-gray-400">{video?.description || 'No description available'}</p>
             </div>
           </div>
         </div>

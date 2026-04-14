@@ -1,6 +1,5 @@
 import type { YouTubeVideo } from '../types';
 
-// Each category has exactly 3 videos
 export const CATEGORIES = [
   { name: 'IT', icon: '💻', color: 'bg-blue-500' },
   { name: 'AI', icon: '🤖', color: 'bg-purple-500' },
@@ -14,266 +13,213 @@ export const CATEGORIES = [
   { name: 'Basketball', icon: '🏀', color: 'bg-orange-500' },
 ];
 
-// Videos organized by category - each category has 3 videos
 export const VIDEOS_BY_CATEGORY: Record<string, YouTubeVideo[]> = {
-  'IT': [
-    {
-      id: 'IT1',
-      title: 'IT Support Fundamentals',
-      thumbnail: 'https://img.youtube.com/vi/IT1/mqdefault.jpg',
-      channelTitle: 'IT Career Hub',
-      description: 'Learn IT basics for beginners',
-      category: 'IT'
-    },
-    {
-      id: 'IT2',
-      title: 'Cloud Computing Explained',
-      thumbnail: 'https://img.youtube.com/vi/IT2/mqdefault.jpg',
-      channelTitle: 'Cloud Masters',
-      description: 'AWS, Azure, GCP introduction',
-      category: 'IT'
-    },
-    {
-      id: 'IT3',
-      title: 'Cybersecurity 101',
-      thumbnail: 'https://img.youtube.com/vi/IT3/mqdefault.jpg',
-      channelTitle: 'Cyber Security',
-      description: 'Protect your systems',
-      category: 'IT'
-    }
-  ],
-  'AI': [
-    {
-      id: 'AI1',
-      title: 'AI for Beginners',
-      thumbnail: 'https://img.youtube.com/vi/AI1/mqdefault.jpg',
-      channelTitle: 'AI Academy',
-      description: 'Introduction to Artificial Intelligence',
-      category: 'AI'
-    },
-    {
-      id: 'AI2',
-      title: 'Machine Learning Crash Course',
-      thumbnail: 'https://img.youtube.com/vi/AI2/mqdefault.jpg',
-      channelTitle: 'ML Explained',
-      description: 'Learn ML in 1 hour',
-      category: 'AI'
-    },
-    {
-      id: 'AI3',
-      title: 'ChatGPT Tutorial',
-      thumbnail: 'https://img.youtube.com/vi/AI3/mqdefault.jpg',
-      channelTitle: 'AI Tools',
-      description: 'Master prompt engineering',
-      category: 'AI'
-    }
-  ],
   'React': [
     {
-      id: 'e1',
+      id: 'LlvBjsyLJnQ',
       title: 'React Tutorial for Beginners',
-      thumbnail: 'https://img.youtube.com/vi/e1/mqdefault.jpg',
-      channelTitle: 'React Mastery',
-      description: 'Learn React hooks and components',
+      thumbnail: 'https://img.youtube.com/vi/LlvBjsyLJnQ/mqdefault.jpg',
+      channelTitle: 'Programming with Mosh',
+      description: 'Learn React.js in this full course for beginners',
       category: 'React'
     },
     {
-      id: 'e2',
-      title: 'React Hooks Deep Dive',
-      thumbnail: 'https://img.youtube.com/vi/e2/mqdefault.jpg',
-      channelTitle: 'React Explained',
-      description: 'useState, useEffect, useContext',
+      id: 'w7ejDZ8SWv8',
+      title: 'React Hooks Full Course',
+      thumbnail: 'https://img.youtube.com/vi/w7ejDZ8SWv8/mqdefault.jpg',
+      channelTitle: 'freeCodeCamp',
+      description: 'Master React Hooks with this comprehensive tutorial',
       category: 'React'
     },
     {
-      id: 'e3',
-      title: 'React Router Complete Guide',
-      thumbnail: 'https://img.youtube.com/vi/e3/mqdefault.jpg',
-      channelTitle: 'React Pro',
-      description: 'Navigation in React apps',
+      id: 'bMknfKXIFA8',
+      title: 'React Router 6 Tutorial',
+      thumbnail: 'https://img.youtube.com/vi/bMknfKXIFA8/mqdefault.jpg',
+      channelTitle: 'Codevolution',
+      description: 'Complete React Router tutorial for beginners',
       category: 'React'
-    }
-  ],
-  'Python': [
-    {
-      id: 'p1',
-      title: 'Python for Beginners',
-      thumbnail: 'https://img.youtube.com/vi/p1/mqdefault.jpg',
-      channelTitle: 'Python Mastery',
-      description: 'Learn Python in 1 hour',
-      category: 'Python'
-    },
-    {
-      id: 'p2',
-      title: 'Python Data Science',
-      thumbnail: 'https://img.youtube.com/vi/p2/mqdefault.jpg',
-      channelTitle: 'Data Science Hub',
-      description: 'Pandas, NumPy tutorial',
-      category: 'Python'
-    },
-    {
-      id: 'p3',
-      title: 'Django Web Framework',
-      thumbnail: 'https://img.youtube.com/vi/p3/mqdefault.jpg',
-      channelTitle: 'Django Pro',
-      description: 'Build web apps with Python',
-      category: 'Python'
     }
   ],
   'JavaScript': [
     {
-      id: 'js1',
-      title: 'JavaScript ES6+ Tutorial',
-      thumbnail: 'https://img.youtube.com/vi/js1/mqdefault.jpg',
-      channelTitle: 'JS Mastery',
+      id: 'W6NZfCO5SIk',
+      title: 'JavaScript Tutorial for Beginners',
+      thumbnail: 'https://img.youtube.com/vi/W6NZfCO5SIk/mqdefault.jpg',
+      channelTitle: 'Programming with Mosh',
+      description: 'Learn JavaScript fundamentals in 1 hour',
+      category: 'JavaScript'
+    },
+    {
+      id: 'PkZNo7MFNFg',
+      title: 'Async JavaScript Tutorial',
+      thumbnail: 'https://img.youtube.com/vi/PkZNo7MFNFg/mqdefault.jpg',
+      channelTitle: 'Web Dev Simplified',
+      description: 'Promises, async/await explained simply',
+      category: 'JavaScript'
+    },
+    {
+      id: 'DHjqpvDnNGE',
+      title: 'ES6 JavaScript Tutorial',
+      thumbnail: 'https://img.youtube.com/vi/DHjqpvDnNGE/mqdefault.jpg',
+      channelTitle: 'Traversy Media',
       description: 'Modern JavaScript features',
       category: 'JavaScript'
-    },
-    {
-      id: 'js2',
-      title: 'Async JavaScript',
-      thumbnail: 'https://img.youtube.com/vi/js2/mqdefault.jpg',
-      channelTitle: 'JS Explained',
-      description: 'Promises, async/await',
-      category: 'JavaScript'
-    },
-    {
-      id: 'js3',
-      title: 'JavaScript DOM Manipulation',
-      thumbnail: 'https://img.youtube.com/vi/js3/mqdefault.jpg',
-      channelTitle: 'Web Dev Pro',
-      description: 'Interactive web pages',
-      category: 'JavaScript'
     }
   ],
-  'Java': [
+  'Python': [
     {
-      id: 'j1',
-      title: 'Java for Beginners',
-      thumbnail: 'https://img.youtube.com/vi/j1/mqdefault.jpg',
-      channelTitle: 'Java Mastery',
-      description: 'Object-oriented programming',
-      category: 'Java'
+      id: '_uQrJ0TkZlc',
+      title: 'Python Tutorial for Beginners',
+      thumbnail: 'https://img.youtube.com/vi/_uQrJ0TkZlc/mqdefault.jpg',
+      channelTitle: 'Programming with Mosh',
+      description: 'Learn Python in 1 hour',
+      category: 'Python'
     },
     {
-      id: 'j2',
-      title: 'Spring Boot Tutorial',
-      thumbnail: 'https://img.youtube.com/vi/j2/mqdefault.jpg',
-      channelTitle: 'Spring Framework',
-      description: 'Build REST APIs with Java',
-      category: 'Java'
+      id: 'rfscVS0vtbw',
+      title: 'Python Full Course',
+      thumbnail: 'https://img.youtube.com/vi/rfscVS0vtbw/mqdefault.jpg',
+      channelTitle: 'freeCodeCamp',
+      description: 'Complete Python course',
+      category: 'Python'
     },
     {
-      id: 'j3',
-      title: 'Java Multithreading',
-      thumbnail: 'https://img.youtube.com/vi/j3/mqdefault.jpg',
-      channelTitle: 'Java Concurrency',
-      description: 'Parallel programming in Java',
-      category: 'Java'
+      id: '8ext9G7xOug',
+      title: 'Django Web Framework',
+      thumbnail: 'https://img.youtube.com/vi/8ext9G7xOug/mqdefault.jpg',
+      channelTitle: 'Tech With Tim',
+      description: 'Build web apps with Django',
+      category: 'Python'
     }
   ],
-  'Jazz Music': [
+  'AI': [
     {
-      id: 'jazz1',
-      title: 'Smooth Jazz for Coding',
-      thumbnail: 'https://img.youtube.com/vi/jazz1/mqdefault.jpg',
-      channelTitle: 'Jazz Vibes',
-      description: 'Relaxing jazz playlist',
-      category: 'Jazz Music'
+      id: '2FPCoo6tvUY',
+      title: 'AI for Beginners',
+      thumbnail: 'https://img.youtube.com/vi/2FPCoo6tvUY/mqdefault.jpg',
+      channelTitle: 'Andrej Karpathy',
+      description: 'Introduction to Artificial Intelligence',
+      category: 'AI'
     },
     {
-      id: 'jazz2',
-      title: 'Jazz Piano Tutorial',
-      thumbnail: 'https://img.youtube.com/vi/jazz2/mqdefault.jpg',
-      channelTitle: 'Jazz Lessons',
-      description: 'Learn jazz piano basics',
-      category: 'Jazz Music'
+      id: 'aircAruvnKk',
+      title: 'Machine Learning Crash Course',
+      thumbnail: 'https://img.youtube.com/vi/aircAruvnKk/mqdefault.jpg',
+      channelTitle: 'StatQuest',
+      description: 'Machine learning fundamentals',
+      category: 'AI'
     },
     {
-      id: 'jazz3',
-      title: 'Bossa Nova Jazz',
-      thumbnail: 'https://img.youtube.com/vi/jazz3/mqdefault.jpg',
-      channelTitle: 'Bossa Nova',
-      description: 'Brazilian jazz music',
-      category: 'Jazz Music'
+      id: 'wjZofJX0v4M',
+      title: 'ChatGPT Explained',
+      thumbnail: 'https://img.youtube.com/vi/wjZofJX0v4M/mqdefault.jpg',
+      channelTitle: 'Two Minute Papers',
+      description: 'How ChatGPT works',
+      category: 'AI'
     }
   ],
-  'Game': [
+  'Web Dev': [
     {
-      id: 'game1',
-      title: 'Game Development for Beginners',
-      thumbnail: 'https://img.youtube.com/vi/game1/mqdefault.jpg',
-      channelTitle: 'Game Dev Hub',
-      description: 'Unity tutorial',
-      category: 'Game'
+      id: 'pQN-pnXPaVg',
+      title: 'HTML & CSS Tutorial',
+      thumbnail: 'https://img.youtube.com/vi/pQN-pnXPaVg/mqdefault.jpg',
+      channelTitle: 'Fireship',
+      description: 'Quick guide to HTML/CSS',
+      category: 'Web Dev'
     },
     {
-      id: 'game2',
-      title: 'Top Indie Games 2024',
-      thumbnail: 'https://img.youtube.com/vi/game2/mqdefault.jpg',
-      channelTitle: 'Game Reviews',
-      description: 'Best indie games',
-      category: 'Game'
+      id: 'Oe421EPjeBE',
+      title: 'Tailwind CSS Tutorial',
+      thumbnail: 'https://img.youtube.com/vi/Oe421EPjeBE/mqdefault.jpg',
+      channelTitle: 'Traversy Media',
+      description: 'Learn Tailwind CSS',
+      category: 'Web Dev'
     },
     {
-      id: 'game3',
+      id: 'SqcY0GlETPk',
+      title: 'Next.js Tutorial',
+      thumbnail: 'https://img.youtube.com/vi/SqcY0GlETPk/mqdefault.jpg',
+      channelTitle: 'Net Ninja',
+      description: 'Full Next.js course',
+      category: 'Web Dev'
+    }
+  ],
+  'Game Dev': [
+    {
+      id: 'j48LtUkZRjU',
+      title: 'Unity Game Development',
+      thumbnail: 'https://img.youtube.com/vi/j48LtUkZRjU/mqdefault.jpg',
+      channelTitle: 'Brackeys',
+      description: 'Make your first game',
+      category: 'Game Dev'
+    },
+    {
+      id: 'WO41S6U6PvI',
       title: 'Game Design Principles',
-      thumbnail: 'https://img.youtube.com/vi/game3/mqdefault.jpg',
-      channelTitle: 'Game Design',
-      description: 'Create engaging games',
-      category: 'Game'
-    }
-  ],
-  'Football': [
-    {
-      id: 'foot1',
-      title: 'Best Goals of the Season',
-      thumbnail: 'https://img.youtube.com/vi/foot1/mqdefault.jpg',
-      channelTitle: 'Football Highlights',
-      description: 'Amazing goals',
-      category: 'Football'
+      thumbnail: 'https://img.youtube.com/vi/WO41S6U6PvI/mqdefault.jpg',
+      channelTitle: 'Dani',
+      description: 'Learn game design',
+      category: 'Game Dev'
     },
     {
-      id: 'foot2',
+      id: 'AmGSEH7QcDg',
+      title: 'Unreal Engine 5 Tutorial',
+      thumbnail: 'https://img.youtube.com/vi/AmGSEH7QcDg/mqdefault.jpg',
+      channelTitle: 'Unreal Engine',
+      description: 'Getting started with UE5',
+      category: 'Game Dev'
+    }
+  ],
+  'Music': [
+    {
+      id: '7NOSDKb0HlU',
+      title: 'Relaxing Jazz Music',
+      thumbnail: 'https://img.youtube.com/vi/7NOSDKb0HlU/mqdefault.jpg',
+      channelTitle: 'Jazz Cafe',
+      description: 'Smooth jazz for coding',
+      category: 'Music'
+    },
+    {
+      id: '5qap5aO4i9A',
+      title: 'Lofi Hip Hop Mix',
+      thumbnail: 'https://img.youtube.com/vi/5qap5aO4i9A/mqdefault.jpg',
+      channelTitle: 'Lofi Girl',
+      description: 'Study and relax',
+      category: 'Music'
+    },
+    {
+      id: 'jfKfPfyJRdk',
+      title: 'Classical Piano',
+      thumbnail: 'https://img.youtube.com/vi/jfKfPfyJRdk/mqdefault.jpg',
+      channelTitle: 'Classical Music',
+      description: 'Beethoven, Mozart, Chopin',
+      category: 'Music'
+    }
+  ],
+  'Sports': [
+    {
+      id: 'X_7iH-bYiX4',
+      title: 'NBA Best Plays',
+      thumbnail: 'https://img.youtube.com/vi/X_7iH-bYiX4/mqdefault.jpg',
+      channelTitle: 'NBA',
+      description: 'Top 10 plays of the week',
+      category: 'Sports'
+    },
+    {
+      id: 'qDYcEO_jh0I',
       title: 'Football Skills Tutorial',
-      thumbnail: 'https://img.youtube.com/vi/foot2/mqdefault.jpg',
-      channelTitle: 'Skills School',
+      thumbnail: 'https://img.youtube.com/vi/qDYcEO_jh0I/mqdefault.jpg',
+      channelTitle: 'Football Skills',
       description: 'Learn football tricks',
-      category: 'Football'
+      category: 'Sports'
     },
     {
-      id: 'foot3',
-      title: 'Champions League Final 2024',
-      thumbnail: 'https://img.youtube.com/vi/foot3/mqdefault.jpg',
-      channelTitle: 'UEFA',
-      description: 'Match highlights',
-      category: 'Football'
-    }
-  ],
-  'Basketball': [
-    {
-      id: 'bball1',
-      title: 'NBA Top 10 Plays',
-      thumbnail: 'https://img.youtube.com/vi/bball1/mqdefault.jpg',
-      channelTitle: 'NBA Highlights',
-      description: 'Best basketball moments',
-      category: 'Basketball'
-    },
-    {
-      id: 'bball2',
-      title: 'Basketball Drills for Beginners',
-      thumbnail: 'https://img.youtube.com/vi/bball2/mqdefault.jpg',
-      channelTitle: 'Basketball Training',
-      description: 'Improve your game',
-      category: 'Basketball'
-    },
-    {
-      id: 'bball3',
-      title: 'Stephen Curry Shooting Tips',
-      thumbnail: 'https://img.youtube.com/vi/bball3/mqdefault.jpg',
-      channelTitle: 'Shooting School',
-      description: 'Perfect your shot',
-      category: 'Basketball'
+      id: 'tIWpr3tHzII',
+      title: 'Best Olympic Moments',
+      thumbnail: 'https://img.youtube.com/vi/tIWpr3tHzII/mqdefault.jpg',
+      channelTitle: 'Olympics',
+      description: 'Greatest sports moments',
+      category: 'Sports'
     }
   ]
 };
