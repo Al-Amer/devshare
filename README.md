@@ -1,4 +1,8 @@
 
+## 🌐 Live Demo
+Check out the live app: [DevShare on Vercel](https://devshare-two.vercel.app)
+
+
 # 🎬 DevShare - Social Dev Resource Hub
 
 A modern, responsive web application for discovering and sharing developer tutorials, tech content, and entertainment videos. Built with React, TypeScript, and Tailwind CSS.
@@ -38,3 +42,21 @@ A modern, responsive web application for discovering and sharing developer tutor
 ```bash
 git clone https://github.com/Al-Amer/devshare.git
 cd devshare
+
+
+## 🌐 Live Demo
+Check out the live app: [DevShare on Vercel](https://devshare-two.vercel.app)
+
+
+Main URL: https://devshare-two.vercel.app
+
+Alternative URL: https://devshare-do0gix6gk-amers-projects-86602e02.vercel.app
+
+✅ What's Working:
+
+✅ Home page with categories
+✅ Video playback
+✅ Analytics dashboard
+✅ Dark mode
+✅ Share features
+✅ All pages and routing
