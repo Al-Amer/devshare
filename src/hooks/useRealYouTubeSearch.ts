@@ -16,7 +16,6 @@ export const useRealYouTubeSearch = () => {
     setError(null);
     
     try {
-      // Using RapidAPI's YouTube search (example - find actual API on RapidAPI)
       const response = await axios.get('https://youtube-search6.p.rapidapi.com/search/', {
         params: {
           query: query,

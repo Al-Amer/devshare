@@ -4,9 +4,8 @@ export interface YouTubeVideo {
   thumbnail: string;
   channelTitle: string;
   description: string;
-  category?: string; // Add category to video
+  category?: string; 
 }
-
 export interface SharedResource {
   id: string;
   videoId: string;
@@ -14,8 +13,6 @@ export interface SharedResource {
   sharedBy: string;
   sharedAt: Date;
 }
-
-// Add Category type
 export interface Category {
   name: string;
   icon: string;

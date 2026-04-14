@@ -14,10 +14,8 @@ const HomePage = () => {
   
   const { searchYouTube, loading, error } = useYouTubeSearch();
   
-  // Check if API key exists
   const hasApiKey = !!import.meta.env.VITE_YOUTUBE_API_KEY;
 
-  // Handle search form submission
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchTerm.trim()) return;
@@ -27,26 +25,21 @@ const HomePage = () => {
     setIsSearching(false);
   };
 
-  // Get videos to display
   const getDisplayedVideos = (): YouTubeVideo[] => {
-    // If searching, show search results
     if (isSearching || searchResults.length > 0) {
       return searchResults;
     }
     
-    // If category selected, show category videos
     if (selectedCategory) {
       return VIDEOS_BY_CATEGORY[selectedCategory] || [];
     }
     
-    // Otherwise show all videos
     return ALL_VIDEOS;
   };
   
   const displayedVideos = getDisplayedVideos();
   const isSearchMode = isSearching || searchResults.length > 0;
 
-  // Clear search results
   const clearSearch = () => {
     setSearchTerm('');
     setSearchResults([]);
@@ -60,8 +53,6 @@ const HomePage = () => {
         <h1 className="text-4xl font-bold text-center text-gray-800 dark:text-white mb-8">
           Discover Videos on YouTube
         </h1>
-        
-        {/* Search Bar - This sends query to YouTube */}
         <form onSubmit={handleSearch} className="max-w-2xl mx-auto mb-8">
           <div className="flex gap-2">
             <input
@@ -81,8 +72,6 @@ const HomePage = () => {
             </button>
           </div>
         </form>
-        
-        {/* Show category buttons only when not searching */}
         {!isSearchMode && (
           <>
             <CategoryButtons
@@ -90,7 +79,6 @@ const HomePage = () => {
               selectedCategory={selectedCategory}
               onSelectCategory={setSelectedCategory}
             />
-            
             {selectedCategory && (
               <div className="text-center mb-6">
                 <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
@@ -101,8 +89,6 @@ const HomePage = () => {
             )}
           </>
         )}
-        
-        {/* Search Mode Header */}
         {isSearchMode && (
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
@@ -116,8 +102,6 @@ const HomePage = () => {
             </button>
           </div>
         )}
-        
-        {/* Error Message */}
         {error && (
           <div className="bg-red-100 dark:bg-red-900/30 border border-red-400 text-red-700 dark:text-red-400 px-4 py-3 rounded text-center max-w-2xl mx-auto mb-8">
             {error}
@@ -126,16 +110,12 @@ const HomePage = () => {
             </p>
           </div>
         )}
-        
-        {/* Loading State */}
         {loading && (
           <div className="text-center py-12">
             <Loader2 size={48} className="animate-spin mx-auto text-purple-600 mb-4" />
             <p className="text-gray-600 dark:text-gray-400">Searching YouTube...</p>
           </div>
         )}
-        
-        {/* Videos Grid */}
         {!loading && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {displayedVideos.map((video) => (
@@ -182,16 +162,12 @@ const HomePage = () => {
             ))}
           </div>
         )}
-        
-        {/* Empty State */}
         {!loading && displayedVideos.length === 0 && !error && (
           <div className="text-center py-12 text-gray-500 dark:text-gray-400">
             <PlayCircle size={48} className="mx-auto mb-4 opacity-50" />
             <p>No videos found. Try searching for something or select a category!</p>
           </div>
         )}
-        
-        {/* API Key Info */}
         {!hasApiKey && (
           <div className="mt-8 p-4 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg">
             <p className="text-yellow-800 dark:text-yellow-200 text-sm text-center">

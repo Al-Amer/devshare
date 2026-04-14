@@ -20,7 +20,6 @@ const CategoryButtons = ({ categories, selectedCategory, onSelectCategory }: Cat
         >
           All Videos
         </button>
-        
         {categories.map((category) => (
           <button
             key={category.name}

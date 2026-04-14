@@ -61,7 +61,6 @@ export const useYouTubeSearch = () => {
     setLoading(true);
     setError(null);
     
-    // Simulate network delay for realistic feel
     setTimeout(() => {
       const filtered = MOCK_VIDEOS.filter(video => 
         video.title.toLowerCase().includes(query.toLowerCase()) ||

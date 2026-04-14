@@ -2,8 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import type { YouTubeVideo } from '../types';
 
-// Note: You'll need a YouTube API key
-// Get it free from: https://console.cloud.google.com/
+
 const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 
 export const useYouTubeSearch = () => {
@@ -35,7 +34,6 @@ export const useYouTubeSearch = () => {
         }
       );
 
-      // Transform YouTube API response to our Video format
       const searchResults: YouTubeVideo[] = response.data.items.map((item: any) => ({
         id: item.id.videoId,           // YouTube video ID
         title: item.snippet.title,
@@ -47,7 +45,6 @@ export const useYouTubeSearch = () => {
 
       setVideos(searchResults);
       
-      // Save search results to localStorage for VideoPage to access
       localStorage.setItem('searchResults', JSON.stringify(searchResults));
       
     } catch (err: any) {

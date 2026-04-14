@@ -14,35 +14,26 @@ const VideoPage = () => {
   const [video, setVideo] = useState<YouTubeVideo | undefined>();
   
   useEffect(() => {
-    // Try to get video from navigation state (search results)
     const stateVideo = location.state?.videoData as YouTubeVideo;
     
     if (stateVideo && stateVideo.id === id) {
-      // Video came from search results
       setVideo(stateVideo);
     } else {
-      // Video came from our local data
       const localVideo = ALL_VIDEOS.find(v => v.id === id);
       setVideo(localVideo);
     }
-    
-    // Track view
     const videoToTrack = video || stateVideo;
     if (videoToTrack && id) {
       const views = JSON.parse(localStorage.getItem('videoViews') || '{}');
       views[id] = (views[id] || 0) + 1;
       localStorage.setItem('videoViews', JSON.stringify(views));
-      
-      // Track watch history
       const watchHistory = JSON.parse(localStorage.getItem('watchHistory') || '[]');
       watchHistory.push({
         videoId: id,
         title: videoToTrack.title,
         date: new Date().toISOString().split('T')[0]
       });
-      localStorage.setItem('watchHistory', JSON.stringify(watchHistory));
-      
-      // Check if liked - FIXED: Safely check if likes exists
+      localStorage.setItem('watchHistory', JSON.stringify(watchHistory));      
       const likes = JSON.parse(localStorage.getItem('videoLikes') || '{}');
       setLiked(!!likes[id]);
     }
@@ -103,7 +94,6 @@ const VideoPage = () => {
     },
   };
 
-  // Get current view count
   const getViewCount = () => {
     if (!id) return 0;
     const views = JSON.parse(localStorage.getItem('videoViews') || '{}');
@@ -115,15 +105,12 @@ const VideoPage = () => {
       <div className="container mx-auto px-4 max-w-5xl">
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
           <div className="aspect-video">
-            {/* YouTube player - takes the video ID directly */}
             <YouTube videoId={id} opts={opts} className="w-full" />
           </div>
-          
           <div className="p-6">
             <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
               {video?.title || 'Video Title'}
             </h1>
-            
             <div className="flex flex-wrap gap-4 mb-6">
               <button
                 onClick={shareVideo}
@@ -132,7 +119,6 @@ const VideoPage = () => {
                 <Share2 size={18} />
                 Share Video
               </button>
-              
               <button
                 onClick={addToSharedList}
                 className="flex items-center gap-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition"
@@ -152,14 +138,12 @@ const VideoPage = () => {
                 <ThumbsUp size={18} />
                 {liked ? 'Liked' : 'Like'}
               </button>
-              
               {copied && (
                 <span className="text-green-600 dark:text-green-400 flex items-center gap-1">
                   <Check size={16} /> Link copied!
                 </span>
               )}
             </div>
-            
             <div className="border-t dark:border-gray-700 pt-4">
               <div className="flex items-center gap-4 mb-4">
                 <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
