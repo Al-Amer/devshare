@@ -138,7 +138,6 @@ const AnalyticsPage = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
       <div className="container mx-auto px-4">
-        {/* Header with Export Button */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
           <h1 className="text-3xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
             <TrendingUp size={28} /> Analytics Dashboard
