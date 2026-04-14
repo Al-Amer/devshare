@@ -1,42 +1,60 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import YouTube from 'react-youtube';
 import { Share2, Copy, Check, ThumbsUp, Eye } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { ALL_VIDEOS } from '../data/videosData';
+import type { YouTubeVideo } from '../types';
 
 const VideoPage = () => {
   const { id } = useParams<{ id: string }>();
+  const location = useLocation();
   const [copied, setCopied] = useState(false);
   const [sharedLocally, setSharedLocally] = useState(false);
   const [liked, setLiked] = useState(false);
-  
-  const video = ALL_VIDEOS.find(v => v.id === id);
+  const [video, setVideo] = useState<YouTubeVideo | undefined>();
   
   useEffect(() => {
-    if (video) {
-      // Track view
+    // Try to get video from navigation state (search results)
+    const stateVideo = location.state?.videoData as YouTubeVideo;
+    
+    if (stateVideo && stateVideo.id === id) {
+      // Video came from search results
+      setVideo(stateVideo);
+    } else {
+      // Video came from our local data
+      const localVideo = ALL_VIDEOS.find(v => v.id === id);
+      setVideo(localVideo);
+    }
+    
+    // Track view
+    const videoToTrack = video || stateVideo;
+    if (videoToTrack && id) {
       const views = JSON.parse(localStorage.getItem('videoViews') || '{}');
-      views[video.id] = (views[video.id] || 0) + 1;
+      views[id] = (views[id] || 0) + 1;
       localStorage.setItem('videoViews', JSON.stringify(views));
+      
+      // Track watch history
       const watchHistory = JSON.parse(localStorage.getItem('watchHistory') || '[]');
       watchHistory.push({
-        videoId: video.id,
-        title: video.title,
+        videoId: id,
+        title: videoToTrack.title,
         date: new Date().toISOString().split('T')[0]
       });
       localStorage.setItem('watchHistory', JSON.stringify(watchHistory));
+      
+      // Check if liked - FIXED: Safely check if likes exists
       const likes = JSON.parse(localStorage.getItem('videoLikes') || '{}');
-      setLiked(!!likes[video.id]);
+      setLiked(!!likes[id]);
     }
-  }, [video]);
+  }, [id, location.state, video]);
   
   const handleLike = () => {
-    if (!video) return;
+    if (!id) return;
     const likes = JSON.parse(localStorage.getItem('videoLikes') || '{}');
     if (liked) {
-      delete likes[video.id];
+      delete likes[id];
     } else {
-      likes[video.id] = true;
+      likes[id] = true;
     }
     localStorage.setItem('videoLikes', JSON.stringify(likes));
     setLiked(!liked);
@@ -85,17 +103,27 @@ const VideoPage = () => {
     },
   };
 
+  // Get current view count
+  const getViewCount = () => {
+    if (!id) return 0;
+    const views = JSON.parse(localStorage.getItem('videoViews') || '{}');
+    return views[id] || 0;
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
       <div className="container mx-auto px-4 max-w-5xl">
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
           <div className="aspect-video">
+            {/* YouTube player - takes the video ID directly */}
             <YouTube videoId={id} opts={opts} className="w-full" />
           </div>
+          
           <div className="p-6">
             <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
               {video?.title || 'Video Title'}
             </h1>
+            
             <div className="flex flex-wrap gap-4 mb-6">
               <button
                 onClick={shareVideo}
@@ -104,6 +132,7 @@ const VideoPage = () => {
                 <Share2 size={18} />
                 Share Video
               </button>
+              
               <button
                 onClick={addToSharedList}
                 className="flex items-center gap-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition"
@@ -111,6 +140,7 @@ const VideoPage = () => {
                 {sharedLocally ? <Check size={18} /> : <Copy size={18} />}
                 {sharedLocally ? 'Shared!' : 'Add to Shared List'}
               </button>
+              
               <button
                 onClick={handleLike}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg transition ${
@@ -122,18 +152,20 @@ const VideoPage = () => {
                 <ThumbsUp size={18} />
                 {liked ? 'Liked' : 'Like'}
               </button>
+              
               {copied && (
                 <span className="text-green-600 dark:text-green-400 flex items-center gap-1">
                   <Check size={16} /> Link copied!
                 </span>
               )}
             </div>
+            
             <div className="border-t dark:border-gray-700 pt-4">
               <div className="flex items-center gap-4 mb-4">
                 <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
                   <Eye size={16} />
                   <span className="text-sm">
-                    {JSON.parse(localStorage.getItem('videoViews') || '{}')[video?.id || ''] || 0} views
+                    {getViewCount()} views
                   </span>
                 </div>
               </div>
