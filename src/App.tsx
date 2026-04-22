@@ -5,8 +5,20 @@ import VideoPage from './pages/VideoPage';
 import SharePage from './pages/SharePage';
 import AboutPage from './pages/AboutPage';
 import AnalyticsPage from './pages/AnalyticsPage';
+import { useEffect } from 'react';
+import { auth } from './lib/firebase';
+
 
 function App() {
+  useEffect(() => {
+  console.log('Firebase Auth State:', auth.currentUser);
+  
+  const unsubscribe = auth.onAuthStateChanged((user) => {
+    console.log('Auth state changed:', user?.email || 'No user');
+  });
+  
+  return () => unsubscribe();
+}, []);
   return (
     <Router>
       <Navbar />

@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 import { ThemeProvider } from './contexts/ThemeContext'
+import { AuthProvider } from './contexts/AuthContext';
+import { FavoritesProvider } from './contexts/FavoritesContext';
+
+
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -18,7 +22,11 @@ if ('serviceWorker' in navigator) {
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeProvider>
-      <App />
+      <AuthProvider>
+        <FavoritesProvider>
+        <App />
+      </FavoritesProvider>
+      </AuthProvider>
     </ThemeProvider>
   </React.StrictMode>,
 )
